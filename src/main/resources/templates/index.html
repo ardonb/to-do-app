@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.min.css} " />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -16,27 +17,28 @@
     <table class="table table-bordered table-striped">
         <thead>
         <tr>
-            <th>Actions</th>
             <th>Id</th>
             <th>Description</th>
             <th>Complete</th>
             <th>Created Date</th>
             <th>Modified Date</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="item : ${todoItems}" th:class="${item.complete} ? success : warning">
+
+            <td th:text="${item.id}">item_id</td>
+            <td th:text="${item.description}">item_description</td>
+            <td><i th:class="${item.complete} ? 'fa-solid fa-check' : 'fa-solid fa-x'"></i></td>
+            <td th:text="${item.createdDate}">item_created_date</td>
+            <td th:text="${item.modifiedDate}">item_modified_date</td>
             <td>
                 <div class="btn btn-group-sm" role="group">
                     <a class="btn btn-info" th:href="@{/edit/{id}(id=${item.id})}">Edit</a>
                     <a class="btn btn-danger" th:href="@{/delete/{id}(id=${item.id})}">Delete</a>
                 </div>
             </td>
-            <td th:text="${item.id}">item_id</td>
-            <td th:text="${item.description}">item_description</td>
-            <td th:text="${item.complete}">item_complete</td>
-            <td th:text="${item.createdDate}">item_created_date</td>
-            <td th:text="${item.modifiedDate}">item_modified_date</td>
         </tr>
         </tbody>
     </table>
